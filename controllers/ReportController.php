@@ -9,6 +9,7 @@ use app\models\Report;
 use app\models\search\Report as ReportSearch;
 use yii\web\HttpException;
 use yii\web\Request;
+use yii\web\Response;
 use yii\data\ArrayDataProvider;
 
 class ReportController extends \yii\web\Controller
@@ -53,7 +54,7 @@ class ReportController extends \yii\web\Controller
     }
     public function actionSaveData(){
     	\Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;       
-        $reports = file_get_contents('./protected/data/reports.json');
+        $reports = file_get_contents('../data/reports.json');
         $report_data=json_decode($reports);
 
         foreach($report_data as $key => $value ) {       	 
@@ -65,14 +66,7 @@ class ReportController extends \yii\web\Controller
                 $model->type = $value->body->type;
                 $model->createdAt =  $value->createdAt;
                 $model->publishedAt = $value->publishedAt;
-                if($model->save()){
-                Yii::$app->response->format = Response::FORMAT_JSON;
-                	 return "ok";
-           		 }
-           		 	else
-           		 {
-                		return  $model->getErrors();
-            	 }
+                $model->save();
          	  set_time_limit(1000);
         }
       

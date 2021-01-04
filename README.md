@@ -39,7 +39,7 @@ Second : With Database
 
     http://localhost:8080
 
-    - Firstly hit : http://localhost:8080/api/report/save-data  (it will save reports.json file data into database, it may takes 5-10 minutes )
+    - Firstly hit : http://localhost:8080/report/save-data  (it will save reports.json file data into database, it may takes 7-8 minutes )
 
     - For Api : http://localhost:8080/api/report/list
 
